@@ -1,8 +1,9 @@
 #Load API Data to SQL Server Using Python
-# Importing modules import requests. install requests and pandas prior to running.
+# Importing modules import requests. Install requests and pandas prior to running.
 import requests
 import pandas as pd 
 from pandas import json_normalize
+from conx import conx 
 
 # Defininig headers
 headers = {
@@ -49,3 +50,5 @@ merged_DF = merged_DF.drop(['company'], axis=1)
 # Print merged data
 print(merged_DF)
 
+#Added code to write to SQL database. 
+merged_DF.to_sql('Users',con=conx, schema='dbo', if_exists='replace',index=True) 
